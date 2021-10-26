@@ -2,6 +2,7 @@
 
 import time
 import sys
+import pymysql
 
 EMULATE_HX711 = False
 
@@ -52,7 +53,14 @@ print("Tare done! Add weight now...")
 # to use both channels, you'll need to tare them both
 # hx.tare_A()
 # hx.tare_B()
-check = []
+
+# for maria db
+db = pymysql.connect(host='localhost', user='root', password='raspberry',
+                     db='mydb', charset='utf8')
+cursor = db.cursor(pymysql.cursors.DictCursor)
+
+insert_data = []
+check = ['first']
 count = 0
 while True:
     try:
@@ -75,10 +83,18 @@ while True:
             print("weight : ", val)
             if count == 10:
                 check.append(int(val))
-        print("count : ", count)
-        print("check : ", check)
+                insert_data.append(check)
+                insert_sql = "INSERT INTO `weights` VALUES (%s, %s);"
+                cursor.executemany(insert_sql, insert_data)
+                db.commit()
 
-        # To get weight from both channels (if you have load cells hooked up
+        # print("count : ", count)
+        # print("check : ", check)
+        select_sql = "select * from weights"
+        cursor.execute(select_sql)
+        result = cursor.fetchall()
+        print("db-result : ", result)
+        # To get weight from both channels (if you have load cells hooked up 
         # to both channel A and B), do something like this
         # val_A = hx.get_weight_A(5)
         # val_B = hx.get_weight_B(5)
