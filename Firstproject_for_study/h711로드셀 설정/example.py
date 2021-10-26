@@ -52,7 +52,8 @@ print("Tare done! Add weight now...")
 # to use both channels, you'll need to tare them both
 # hx.tare_A()
 # hx.tare_B()
-
+check = []
+count = 0
 while True:
     try:
         # These three lines are usefull to debug wether to use MSB or LSB in the reading formats
@@ -64,11 +65,18 @@ while True:
         # print binary_string + " " + np_arr8_string
 
         # Prints the weight. Comment if you're debbuging the MSB and LSB issue.
+
         val = hx.get_weight(5)
         if -1 <= val <= 1:
             print("zeros : ", val)
+            count = 0
         else:
+            count += 1
             print("weight : ", val)
+            if count == 10:
+                check.append(int(val))
+        print("count : ", count)
+        print("check : ", check)
 
         # To get weight from both channels (if you have load cells hooked up
         # to both channel A and B), do something like this
