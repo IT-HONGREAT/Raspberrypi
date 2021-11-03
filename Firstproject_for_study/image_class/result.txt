@@ -1,0 +1,14 @@
+ CUDNN_HALF=1 
+net.optimized_memory = 0 
+mini_batch = 1, batch = 32, time_steps = 1, train = 0 
+Create CUDA-stream - 0 
+ Create cudnn-handle 0 
+
+ seen 64, trained: 32013 K-images (500 Kilo-batches_64) 
+ Detection layer: 82 - type = 28 
+ Detection layer: 94 - type = 28 
+ Detection layer: 106 - type = 28 
+dog.jpg: Predicted in 160.600000 milli-seconds.
+bicycle: 99%	(left_x:  117   top_y:  124   width:  452   height:  309)
+dog: 100%	(left_x:  124   top_y:  224   width:  196   height:  320)
+truck: 94%	(left_x:  474   top_y:   87   width:  217   height:   79)
