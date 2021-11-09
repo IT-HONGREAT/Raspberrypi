@@ -4,7 +4,7 @@ s = int(input("기준이 되는 편심의 무게값(g) : "))
 
 weights = []
 for _ in range(h):
-    n = (map(int, input().split("\n")))
+    n = map(float, input().split())
     weights.append(*list(n))
 
 total = sum(weights)
