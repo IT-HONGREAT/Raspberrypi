@@ -53,8 +53,10 @@ print("Tare done! Add weight now...")
 # to use both channels, you'll need to tare them both
 # hx.tare_A()
 # hx.tare_B()
-data = []
-
+# ---vscode change---
+# data = []
+# data_id = 0
+data_weight = 0
 while True:
     try:
         # These three lines are usefull to debug wether to use MSB or LSB in the reading formats
@@ -72,17 +74,22 @@ while True:
         output_weight = int(val / ave_weight)
 
         if -1 <= output_weight <= 1:
-            print("zeros : ", output_weight)
+            print("zero : ", output_weight)
             count = 0
         else:
             count += 1
             print("weight : ", output_weight)
             if count == 10:
-                data.append(output_weight)
-        print("weights", data)
-        df = pd.DataFrame(data)
-        df.to_csv('sample.csv')
-        print('df:', df)
+                # data.append([data_id,output_weight])
+                # data_id += 1
+                data_weight = output_weight
+
+            # print("weights",data)
+            # df = pd.DataFrame(data)
+            # df.to_csv('sample.csv')
+            print('data_weight:', data_weight)
+        if data_weight >= 10:
+            break
 
         # To get weight from both channels (if you have load cells hooked up
         # to both channel A and B), do something like this
@@ -96,6 +103,7 @@ while True:
 
     except (KeyboardInterrupt, SystemExit):
         cleanAndExit()
+
 
 
 
