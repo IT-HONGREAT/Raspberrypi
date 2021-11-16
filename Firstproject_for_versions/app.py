@@ -9,6 +9,8 @@ from PIL import Image
 from flask import Flask, request, render_template
 from flask_ngrok import run_with_ngrok
 
+from hx711py.example import make_weight
+
 confthres = 0.3
 nmsthres = 0.1
 yolo_path = './'
@@ -136,6 +138,12 @@ def main():
     base64_bytes = base64.b64encode(img_encoded).decode("utf-8")
     return render_template('index.html', user_image=base64_bytes)
 
+
+@app.route('/')
+def weight_out():
+    # exec(Path("/home/pi/Downloads/raspberryproject001/versions/Raspberrypi/Firstproject_for_versions/hx711py/example.py").read_text())
+    temp = make_weight()
+    return render_template('index.html')
 
 # start flask app
 if __name__ == '__main__':
