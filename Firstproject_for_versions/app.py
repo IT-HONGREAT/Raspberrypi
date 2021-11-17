@@ -9,29 +9,30 @@ from PIL import Image
 from flask import Flask, request, render_template
 from flask_ngrok import run_with_ngrok
 
-from hx711py.example import make_weight
 
 confthres = 0.3
 nmsthres = 0.1
 yolo_path = './'
 #add food def
-input_class = '짬뽕'
-input_weight = 600
+# input_class = '짬뽕'
+# input_weight = 600
 
 data = pd.read_csv('food/음식이미지 영양정보 402.csv')
-def classifi(input_class, input_weight):
+def classifi(input_class):
+    from hx711py.example import make_weight
+    input_weight = make_weight()
     for i in range(len(data)):
         if data.iloc[i,6] == input_class:
             nutrition = data.iloc[i]
     div = input_weight/nutrition.iloc[12]
-    b = f'''입력받은 음식 무게는 {input_weight}g입니다.
+    info = f'''입력받은 음식 무게는 {input_weight}g입니다.
         1회 제공량의 약 {round(div, 2)}배 입니다.
         식품명: {nutrition.iloc[6]}
         칼로리: {round(nutrition.iloc[16] * div, 2)} kcal
         탄수화물 {round(nutrition.iloc[23] * div, 2)}g
         단백질 {round(nutrition.iloc[20] * div, 2)}g
         지방 {round(nutrition.iloc[20] * div, 2)}g '''
-    return b
+    return info
 
 def get_labels(labels_path):
     lpath = os.path.sep.join([yolo_path, labels_path])
@@ -118,7 +119,7 @@ def get_predection(image, net, LABELS, COLORS):
             print(boxes)
             print(classIDs)
             cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-    return image
+    return image, classIDs
 
 
 labelsPath = "weights/obj_c2.names"
@@ -142,20 +143,30 @@ def home():
 
 @app.route('/', methods=['POST'])
 def main():
+    # if request.form['count_weight']:
+    #     from hx711py.example import make_weight
+    #     fw = make_weight()
+
+
     img = request.files["file"].read()
     img = Image.open(io.BytesIO(img))
     npimg = np.array(img)
     image = npimg.copy()
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    res = get_predection(image, nets, Lables, Colors)
+    res, foodname = get_predection(image, nets, Lables, Colors)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = cv2.cvtColor(res, cv2.COLOR_BGR2RGB)
     np_img = Image.fromarray(image)
     img_encoded = image_to_byte_array(np_img)
     base64_bytes = base64.b64encode(img_encoded).decode("utf-8")
-    nut = classifi(input_class, input_weight)
 
-    return render_template('index.html', user_image=base64_bytes,num2=nut)
+
+    label = ['닭강정', '짜장면', '짬뽕', '탕수육', '단무지', '만두', '라볶이']
+    idx = foodname[0]
+    foodmenu =label[idx]
+    nut = classifi(foodmenu)
+
+    return render_template('index.html', user_image=base64_bytes,num2=nut, fn=foodmenu)
 
 
 # @app.route('/')

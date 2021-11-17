@@ -56,7 +56,9 @@ print("Tare done! Add weight now...")
 #data = [] 
 #data_id = 0
 def make_weight():
+    # global data_weight
     data_weight = 0
+    count = 0
     while True:
         try:
             # These three lines are usefull to debug wether to use MSB or LSB in the reading formats
@@ -80,7 +82,7 @@ def make_weight():
             else:
                 count += 1
                 print("weight : ", output_weight)
-                if count == 10:
+                if count == 2:
                     #data.append([data_id,output_weight])
                     #data_id += 1
                     data_weight = output_weight
@@ -90,7 +92,9 @@ def make_weight():
             #df.to_csv('sample.csv')
                 print('data_weight:',data_weight)
             if data_weight >=10:
-                break
+                # break
+
+                return data_weight
 
             # To get weight from both channels (if you have load cells hooked up
             # to both channel A and B), do something like this
@@ -105,7 +109,7 @@ def make_weight():
         except (KeyboardInterrupt, SystemExit):
             cleanAndExit()
 
-    return data_weight
+    # return data_weight
 make_weight()
 
 

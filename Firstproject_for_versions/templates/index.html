@@ -21,12 +21,9 @@
         </div>
       </div>
       <form action="" method=post enctype=multipart/form-data>
+<!--        <input type="button" value="무게측정" name="count_weight">-->
         <input type=file name=file>
         <input type=submit value=Upload>
-      </form>
-
-      <form action="" method=post>
-        <input type="submit" value="무게측정" name="count_weight">
       </form>
 
     </div>
@@ -37,6 +34,8 @@
 
         <div class="col-lg-4">
           <div class="page-header">
+<!--            <p> {{ wei }} </p>-->
+            <h2> {{ fn }} </h2>
             <h3 id="tables">Result</h3>
             <p> {{ num2 }} </p>
           </div>
