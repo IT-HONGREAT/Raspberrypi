@@ -2,7 +2,7 @@ import base64
 import io
 import os
 import time
-
+import pandas as pd
 import cv2
 import numpy as np
 from PIL import Image
@@ -14,7 +14,24 @@ from hx711py.example import make_weight
 confthres = 0.3
 nmsthres = 0.1
 yolo_path = './'
+#add food def
+input_class = '짬뽕'
+input_weight = 600
 
+data = pd.read_csv('food/음식이미지 영양정보 402.csv')
+def classifi(input_class, input_weight):
+    for i in range(len(data)):
+        if data.iloc[i,6] == input_class:
+            nutrition = data.iloc[i]
+    div = input_weight/nutrition.iloc[12]
+    b = f'''입력받은 음식 무게는 {input_weight}g입니다.
+        1회 제공량의 약 {round(div, 2)}배 입니다.
+        식품명: {nutrition.iloc[6]}
+        칼로리: {round(nutrition.iloc[16] * div, 2)} kcal
+        탄수화물 {round(nutrition.iloc[23] * div, 2)}g
+        단백질 {round(nutrition.iloc[20] * div, 2)}g
+        지방 {round(nutrition.iloc[20] * div, 2)}g '''
+    return b
 
 def get_labels(labels_path):
     lpath = os.path.sep.join([yolo_path, labels_path])
@@ -136,14 +153,16 @@ def main():
     np_img = Image.fromarray(image)
     img_encoded = image_to_byte_array(np_img)
     base64_bytes = base64.b64encode(img_encoded).decode("utf-8")
-    return render_template('index.html', user_image=base64_bytes)
+    nut = classifi(input_class, input_weight)
+
+    return render_template('index.html', user_image=base64_bytes,num2=nut)
 
 
-@app.route('/')
-def weight_out():
-    # exec(Path("/home/pi/Downloads/raspberryproject001/versions/Raspberrypi/Firstproject_for_versions/hx711py/example.py").read_text())
-    temp = make_weight()
-    return render_template('index.html')
+# @app.route('/')
+# def weight_out():
+#     # exec(Path("/home/pi/Downloads/raspberryproject001/versions/Raspberrypi/Firstproject_for_versions/hx711py/example.py").read_text())
+#     temp = make_weight()
+#     return render_template('index.html')
 
 # start flask app
 if __name__ == '__main__':
