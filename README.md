@@ -1,6 +1,8 @@
 # 발표영상
 
-<iframe width="1474" height="554" src="https://www.youtube.com/embed/odUpwz2pkYg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+[![로고](https://user-images.githubusercontent.com/80932397/144426700-16ac06b9-39ea-47cb-9a2d-88dcb4c1f789.png)](https://www.youtube.com/watch?v=odUpwz2pkYg) 
 
 
 
