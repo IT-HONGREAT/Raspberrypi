@@ -1,5 +1,13 @@
-# 프로젝트 결과물
+# 발표영상
 
+<iframe width="1474" height="554" src="https://www.youtube.com/embed/odUpwz2pkYg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+
+# 프로젝트 결과 및 수상내역-우수상
+
+### 결과
 ![image](https://user-images.githubusercontent.com/80932397/142378323-7c306e40-fe96-4f0f-b798-80fe49c53df3.png)
 - 참고 : 무게센서에 50g 편심을 올려놓고 측정을 했기 때문에, 50g으로 출력되었다.
 - 라즈베리파이와 무게센서(50g편심)
