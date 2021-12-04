@@ -2,7 +2,7 @@
 
 
 
-[![로고](https://user-images.githubusercontent.com/80932397/144426700-16ac06b9-39ea-47cb-9a2d-88dcb4c1f789.png)](https://www.youtube.com/watch?v=odUpwz2pkYg) 
+[![로고](https://user-images.githubusercontent.com/80932397/144426700-16ac06b9-39ea-47cb-9a2d-88dcb4c1f789.png)](https://youtu.be/kKvXxpI597g) 
 
 
 
