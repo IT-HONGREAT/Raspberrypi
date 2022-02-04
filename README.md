@@ -31,7 +31,7 @@
 ## 3. 라즈베리파이 사용 및 적용과정 :pushpin:
   **노션에 라즈베리파이를 겪은 과정을 기록했습니다**
   
-  * [초기원격 접속](https://deeply-saturnalia-5c9.notion.site/PC-b42af89c934d431580515ce392cfdcbd)
+  * [초기원격 접속(참고이미지 입니다)](https://deeply-saturnalia-5c9.notion.site/PC-b42af89c934d431580515ce392cfdcbd)
   1. [무게센서 연동 및 영점조절](https://deeply-saturnalia-5c9.notion.site/4340635a6af14bedafa46705c0115041)
   2. [이미지 업로드 요청 -> 음식무게측정 -> 결과출력](https://deeply-saturnalia-5c9.notion.site/a93c72a97c8042569db3fd34be03da73)
 
